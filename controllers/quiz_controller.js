@@ -32,7 +32,13 @@ exports.load = function (req, res, next, quizId)
 
 exports.index = function(req,res)
 {
-	models.Quiz.findAll()
+	var opciones = {};
+	console.log('index');
+	console.log(req.query.search);
+	if (req.query.search)
+	  opciones = {where: ["pregunta like ?", '%' + req.query.search.replace('+','%') +'%']}
+
+	models.Quiz.findAll(opciones)
 	.then
 	(
 		function (quizes)
