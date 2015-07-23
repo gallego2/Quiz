@@ -8,6 +8,13 @@ module.exports = function (sequelize, DataTypes)
 			},
 			respuesta:{ type: DataTypes.STRING,
 						validate: {notEmpty: {msg:"-> Falta respuesta"}}
+			},
+			categoria:{ type: DataTypes.STRING,
+						validate: { isIn: {args: [['Humanidades', 'Ocio', 'Ciencia', 'Tecnología']],
+										   msg: "Categoría no valida"		
+										  },
+									notEmpty: {msg:"-> Ha de seleccionar una categoría valida"}
+								  }
 			}
 		}
 	);
