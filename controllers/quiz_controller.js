@@ -98,7 +98,8 @@ exports.edit = function(req,res) {
 exports.update = function (req, res) {
   req.quiz.pregunta = req.body.quiz.pregunta;
   req.quiz.respuesta = req.body.quiz.respuesta;
-
+  req.quiz.categoria = req.body.quiz.categoria;
+  console.log('categoria:' + req.quiz.categoria);
   req.quiz
   .validate()
   .then(
