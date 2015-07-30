@@ -1,3 +1,14 @@
+//MW de autorización de accesos http restringidos
+exports.loginRequired = function(req, res, next) {
+	if (req.session.user) {
+		next();
+	} else {
+		res.redirect('/login');
+	}
+};
+
+
+
 //get /login --formulario de login
 
 exports.new = function (req,res) {
