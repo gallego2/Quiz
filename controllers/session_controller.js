@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-//get /login --formulario de login
-
-=======
 //MW de autorización de accesos http restringidos
 exports.loginRequired = function(req, res, next) {
 	if (req.session.user) {
@@ -14,7 +10,6 @@ exports.loginRequired = function(req, res, next) {
 
 
 //get /login --formulario de login
->>>>>>> m9-autorizacion
 exports.new = function (req,res) {
 	var errors = req.session.errors || {};
 	req.session.errors = {};
