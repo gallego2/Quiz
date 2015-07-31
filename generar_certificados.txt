@@ -1,0 +1,16 @@
+Pasos para crear los certificados
+
+1. Crear ruta de directorios: c:\usr\local
+
+2. Copiar directorio: c:\program files (x86)\git\ssl 
+3. Pegar el directorio en c:\usr\local
+
+4. Crear directorio certs en el directorio de proyecto Quiz
+5. colocarnos es ese directorio mediante comando cd
+6. Ejecutar siguientes comandos:
+
+	openssl genrsa -out quiz-2015-key.pem 2048
+
+	openssl req -new -sha256 -key quiz-2015-key.pem -out quiz-2015-csr.pem
+
+	openssl x509 -req -in quiz-2015-csr.pem -signkey quiz-2015-key.pem -out quiz-2015-cert.pem
