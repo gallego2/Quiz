@@ -43,6 +43,37 @@ app.use(function(req,res,next){
 });
 
 
+// Controlamos que si está logeado no pase más de 120 segundos si hacer una peticion
+app.use(function(req,res,next) {
+  //si no está logeado se sigue tal cual
+  if (!req.session.user) {
+    console.log('sin usuario');
+    next();
+    return;
+  }
+
+  var fechaActual = new Date().getTime(); 
+
+  //si no existe var ultimo acceso, la creamos y empezamos a tener en cuenta el tiempo
+  if (!req.session.ultimoAcceso) {
+    req.session.ultimoAcceso = new Date().getTime();
+  }
+
+  //diferencia en segundos entre el ultimo acceso y el actual
+  var result = (fechaActual - req.session.ultimoAcceso)/1000;
+  
+  if (result <= 120) {
+    //si menos de 120 segundos, actualizamos fecha y seguimos.
+    req.session.ultimoAcceso = fechaActual;
+  }
+  else {
+    // borramos variables de session que es lo que hace el logout
+    delete req.session.user;
+    delete req.session.ultimoAcceso;
+  }
+  next();
+});
+
 
 app.use('/', routes);
 
